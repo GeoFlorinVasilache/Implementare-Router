@@ -1,0 +1,10 @@
+Pentru a implementa ipv4 mai intai verificam daca adresa ethernet destinatie era chiar adresa ethernet a interfetei pe care a venit pachetul
+sau era adresa de brodcast ( pachet destinat oricui) , daca da trebuia sa verific daca protocolul este chiar ipv4 sau arp, daca era
+ipv4 trebuia sa vad daca chiar eu sunt destinatia , practic comparam adrsea destinatie cu adresa ip de pe interfata, daca eram eu destinatia
+aunci era vorba despre un icmp de tip echo-replay daca nu trebuia sa verific ttl, si checksum ca sa vad daca poate fi trimis mai departe pachetul.
+Pentru a calcula destinatia viitoare am folosit algoritmul lpm cu trie, explicat in laborator unde practic puneam prefixul dar in functie de masca
+prefix,masca ,next hop,interfata.
+Pentru arp aveam 3 cazuri cazul in care trebuia sa trimit eu arp pentru ca nu stiiam adresa ethernet la care sa trimit pachetul,
+cazul in care primeam ca router un pachet de tip arp replay iar in cazul in care era pentru mine salvam rapsunsul si pachetel care se regaseau in coada
+de pachete netrimise si aveau nevoie de acest raspuns pentru a fi trimise le trimiteam unde trebuie ,in caz contrat doar dadeam replay-ul mai departe.
+Si cazul in care primeam un arp request daca era nevoie de adresa mea ethernet dadeam raspunsul cu adresa mea sau doar trimiteam mai departe acest mesaj. 
